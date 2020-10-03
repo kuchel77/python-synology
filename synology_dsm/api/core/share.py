@@ -65,6 +65,8 @@ class SynoCoreShare(object):
     def share_size(self, share_uuid, human_readable=False):
         """Total size of share."""
         share_size_mb = self.get_share(share_uuid).get("share_quota_used")
+        if share_size_mb is None:
+            return None
         # Share size is returned in MB so we convert it.
         share_size_bytes = SynoFormatHelper.megabytes_to_bytes(share_size_mb)
         if human_readable:
